@@ -28,10 +28,7 @@ class ViewController: UIViewController {
         greenSlider.minimumTrackTintColor = .green
 //        blueSlider.minimumTrackTintColor = .blue
         
-        colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value),
-                                            green: CGFloat(greenSlider.value),
-                                            blue: CGFloat(blueSlider.value),
-                                            alpha: 1)
+        setColor()
         
         redLabel.text = String(format: "%.2f", redSlider.value)
         greenLabel.text = String(format: "%.2f", greenSlider.value)
@@ -39,14 +36,25 @@ class ViewController: UIViewController {
     }
     
     @IBAction func rgbSlider(_ sender: UISlider) {
+        setColor()
+        
+        switch sender.tag {
+        case 0: redLabel.text = string(from: sender)
+        case 1: greenLabel.text = string(from: sender)
+        case 2: blueLabel.text = string(from: sender)
+        default: break
+        }
+    }
+    
+    private func setColor() {
         colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value),
                                             green: CGFloat(greenSlider.value),
                                             blue: CGFloat(blueSlider.value),
                                             alpha: 1)
-        
-        redLabel.text = String(format: "%.2f", redSlider.value)
-        greenLabel.text = String(format: "%.2f", greenSlider.value)
-        blueLabel.text = String(format: "%.2f", blueSlider.value)
+    }
+    
+    private func string(from slider: UISlider) -> String {
+        String(format: "%.2f", slider.value)
     }
     
 }
